@@ -1,10 +1,10 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
 const reset = css`
   * {
     box-sizing: border-box;
   }
-  
+
   html,
   body,
   div,
@@ -92,7 +92,7 @@ const reset = css`
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-    text-decoration: none
+    text-decoration: none;
   }
   /* HTML5 display-role reset for older browsers */
   article,
