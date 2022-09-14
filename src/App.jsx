@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Issue from './pages/Issue';
 import IssueDetail from './pages/IssueDetail';
 
-
 function App() {
   return (
     <BrowserRouter>
