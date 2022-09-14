@@ -11,3 +11,9 @@ export const getIssues = ({ page, perPage, sort }) => {
     },
   });
 };
+
+export const getIssueDetail = ({ id }) => {
+  return http.get({
+    url: `${ISSUE_URL}/${id}`,
+  });
+};

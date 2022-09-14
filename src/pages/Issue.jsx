@@ -14,6 +14,12 @@ function Issue() {
   const [observeElement, setObserveElement] = useState(null);
   const isShowObserve = useIntersection(observeElement);
 
+  useEffect(()=> {
+    return () => {
+      setIssueList([]);
+    }
+  }, [])
+
   useEffect(() => {
     setLoading(true);
     getIssues({
