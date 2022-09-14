@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { IssueListItem } from '.';
 
 function IssueList({ issueList }) {
@@ -9,18 +10,23 @@ function IssueList({ issueList }) {
   };
 
   return (
-    <ul>
-      {issueList.map((issue) => {
+    <Wrap>
+      {issueList.map((issue, index) => {
         return (
           <IssueListItem
             issue={issue}
+            index={index}
             key={issue.id}
             onClick={handleClickIssueList}
           />
         );
       })}
-    </ul>
+    </Wrap>
   );
 }
 
 export default IssueList;
+
+const Wrap = styled.ul`
+  width: 100%;
+`;

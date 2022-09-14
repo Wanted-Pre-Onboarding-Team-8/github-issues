@@ -14,7 +14,7 @@ function IssueDetailContent({ detailIssue }) {
         <li>
           <img src={avatar_url} alt={login} />
         </li>
-        <IssueListItem issue={detailIssue} />
+        <IssueListItem issue={detailIssue} index={0} />
       </IssueHeaderWrapper>
       <ReactMarkdown>{body}</ReactMarkdown>
     </IssueDetailWrapper>
@@ -24,6 +24,7 @@ function IssueDetailContent({ detailIssue }) {
 export default IssueDetailContent;
 
 const IssueDetailWrapper = styled.div`
+  margin-top: 5em;
   padding: 20px;
 `;
 const IssueHeaderWrapper = styled.ul`

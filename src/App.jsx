@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Layout } from './components/common';
+import { Layout } from './components';
 import Issue from './pages/Issue';
 import IssueDetail from './pages/IssueDetail';
 
