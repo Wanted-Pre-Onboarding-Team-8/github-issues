@@ -3,6 +3,7 @@ import { getIssues } from '@/apis/github';
 import { IssueList } from '@/components/Issue';
 import { useIntersection } from '@/hooks';
 import { GithubContext } from '@/store/github';
+import styled from 'styled-components';
 
 const DEFAULT_PER_PAGE_COUNT = 10;
 const DEFAULT_SORT_STRING = 'comments';
@@ -40,13 +41,21 @@ function Issue() {
     isShowObserve && handlePageUp();
   }, [isShowObserve]);
 
+  console.info(isShowObserve);
+  console.info(loading);
+  console.info(observeElement);
+
   return (
-    <div>
+    <Wrap>
       <IssueList issueList={issueList} />
       {!loading && <div ref={setObserveElement}></div>}
       {loading && <div>로딩중</div>}
-    </div>
+    </Wrap>
   );
 }
+
+const Wrap = styled.div`
+  margin-top: 60px;
+`;
 
 export default Issue;
