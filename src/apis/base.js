@@ -10,7 +10,6 @@ const handleRequestConfig = (config) => {
     ...config,
     headers: {
       ...config.headers,
-      // Authorization: `Bearer ${process.env.REACT_APP_GIT_ACCESS_TOKEN}`,
     },
   };
 };

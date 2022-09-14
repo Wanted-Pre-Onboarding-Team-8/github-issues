@@ -1,6 +1,6 @@
 import { THINGS_FLOW_URL } from '@/consts';
 import styled from 'styled-components';
-import ThingsFlowLogo from '../../assets/ThingsFlowLogo.png';
+import ThingsFlowLogo from '../../assets/img/ThingsFlowLogo.png';
 
 function Advertisement() {
   return (
@@ -10,16 +10,16 @@ function Advertisement() {
   );
 }
 
+export default Advertisement;
+
 const Image = styled.div`
   margin: 6px 12px;
   width: 10em;
   height: 10em;
   background: url(${ThingsFlowLogo}) center/cover no-repeat;
   transition: all 0.25s;
-  
+
   &:hover {
     transform: scale(1.25);
   }
 `;
-
-export default Advertisement;

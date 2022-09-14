@@ -4,6 +4,7 @@ import { IssueList } from '@/components/Issue';
 import { useIntersection } from '@/hooks';
 import { GithubContext } from '@/store/github';
 import styled from 'styled-components';
+import { Spinner } from '@/components';
 
 const DEFAULT_PER_PAGE_COUNT = 10;
 const DEFAULT_SORT_STRING = 'comments';
@@ -14,6 +15,12 @@ function Issue() {
   const [loading, setLoading] = useState(true);
   const [observeElement, setObserveElement] = useState(null);
   const isShowObserve = useIntersection(observeElement);
+
+  useEffect(() => {
+    return () => {
+      setIssueList([]);
+    };
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -41,21 +48,28 @@ function Issue() {
     isShowObserve && handlePageUp();
   }, [isShowObserve]);
 
-  console.info(isShowObserve);
-  console.info(loading);
-  console.info(observeElement);
-
   return (
     <Wrap>
       <IssueList issueList={issueList} />
       {!loading && <div ref={setObserveElement}></div>}
-      {loading && <div>로딩중</div>}
+      {loading && (
+        <SpinnerWrap page={page}>
+          <Spinner />
+        </SpinnerWrap>
+      )}
     </Wrap>
   );
 }
 
+export default Issue;
+
 const Wrap = styled.div`
+  width: 100%;
   margin-top: 60px;
 `;
 
-export default Issue;
+const SpinnerWrap = styled.div`
+  margin-top: 1em;
+  height: ${({ page }) => (page === 1 ? `calc(100vh - 4em)` : 'auto')};
+  text-align: center;
+`;

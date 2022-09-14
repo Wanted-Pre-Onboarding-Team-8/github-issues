@@ -1,15 +1,16 @@
-import colors from '@/styles/themes/colors';
-import { changeDate } from '@/utils/util';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { changeDate } from '@/utils/util';
 import styled from 'styled-components';
 import { Advertisement } from '../common';
+import { BiCommentDetail } from 'react-icons/bi';
+import { AiOutlineUser } from 'react-icons/ai';
+import { CgCalendarDates } from 'react-icons/cg';
+import colors from '@/styles/themes/colors';
 
 const ADVERTISEMENT_NUMBER = 4;
 
 function IssueListItem({
   issue: {
-    id,
     title,
     number,
     comments,
@@ -17,23 +18,37 @@ function IssueListItem({
     user: { login },
   },
   index,
+  onClick,
 }) {
-  const navigate = useNavigate();
-  const handleClickIssueList = () => {
-    navigate(`/${id}`);
-  };
-
   return (
     <>
       <AdvertisementWrapper>
         {index === ADVERTISEMENT_NUMBER ? <Advertisement /> : null}
       </AdvertisementWrapper>
-      <ListItemWrapper onClick={handleClickIssueList}>
-        <p>#{number} </p>
-        <span>{title}</span>
-        <div>작성자 : {login}</div>
-        <div>작성일 : {changeDate(created_at, '-')}</div>
-        <div>댓글수 : {comments}</div>
+      <ListItemWrapper
+        isClickActive={onClick ? true : false}
+        onClick={onClick ? () => onClick(number) : () => {}}
+      >
+        <div>
+          <TitleWrapper>
+            <span>#{number} </span>
+            <p>{title}</p>
+          </TitleWrapper>
+          <UserInfoWrap>
+            <div>
+              <AiOutlineUser />
+              <span>{login}</span>
+            </div>
+            <div>
+              <CgCalendarDates />
+              <span>{changeDate(created_at)}</span>
+            </div>
+          </UserInfoWrap>
+        </div>
+        <CommentsWrap>
+          <BiCommentDetail />
+          <span>{comments}</span>
+        </CommentsWrap>
       </ListItemWrapper>
     </>
   );
@@ -47,40 +62,60 @@ const AdvertisementWrapper = styled.div`
 `;
 
 const ListItemWrapper = styled.li`
+  width: 100%;
   border: 2px solid ${colors.shallowGray};
   border-radius: 16px;
   padding: 24px;
-  
+
   margin: 10px 0px;
   color: ${colors.black};
-  -webkit-box-shadow: 1px 1px 14px 1px rgba(0, 0, 0, 0.2);
   box-shadow: 1px 1px 14px 1px rgba(0, 0, 0, 0.2);
-  
+
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 
   :hover {
-    cursor: pointer;
-    background-color: ${colors.shallowGray};
+    cursor: ${({ isClickActive }) => (isClickActive ? 'pointer' : 'default')};
+    background-color: ${({ isClickActive }) =>
+      isClickActive ? colors.shallowGray : colors.white};
   }
-  
-  span, p {
-    margin-bottom: 0.5em;
+`;
+
+const TitleWrapper = styled.div`
+  > span {
+    font-size: 0.9em;
+    text-decoration: underline;
+    color: ${colors.gray1};
   }
-  
-  div {
-    margin-bottom: 0.25em;
-  }
-  
-  span {
+
+  > p {
+    margin-top: 12px;
     font-size: x-large;
     font-weight: bold;
   }
-  
-  p {
-    font-size: 0.9em;
-    text-decoration: underline;
-    color: ${colors.gray1}
+`;
+
+const UserInfoWrap = styled.div`
+  display: flex;
+
+  margin-top: 15px;
+  > div {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    line-height: normal;
+    > svg {
+      padding-bottom: 2px;
+      margin-right: 5px;
+    }
+  }
+`;
+
+const CommentsWrap = styled.div`
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  > svg {
+    margin-right: 6px;
   }
 `;

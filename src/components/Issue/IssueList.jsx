@@ -1,24 +1,32 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { IssueListItem } from '.';
 
 function IssueList({ issueList }) {
+  const navigate = useNavigate();
+  const handleClickIssueList = (number) => {
+    navigate(`/${number}`);
+  };
+
   return (
     <Wrap>
-      <ul>
-        {issueList.map((issue, index) => {
-          return <IssueListItem issue={issue} index={index} key={issue.id} />;
-        })}
-      </ul>
+      {issueList.map((issue, index) => {
+        return (
+          <IssueListItem
+            issue={issue}
+            index={index}
+            key={issue.id}
+            onClick={handleClickIssueList}
+          />
+        );
+      })}
     </Wrap>
   );
 }
 
-const Wrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 export default IssueList;
+
+const Wrap = styled.ul`
+  width: 100%;
+`;

@@ -5,10 +5,10 @@ import GlobalStyle from './styles/GlobalStyle';
 import { GithubStore } from '@/store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-  <GithubStore>
-    <GlobalStyle />
-    <App />
-  </GithubStore>,
-  //</React.StrictMode>,
+  <React.StrictMode>
+    <GithubStore>
+      <GlobalStyle />
+      <App />
+    </GithubStore>
+  </React.StrictMode>,
 );

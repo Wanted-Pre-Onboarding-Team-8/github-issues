@@ -13,6 +13,8 @@ function Header() {
   );
 }
 
+export default Header;
+
 const Wrap = styled.div`
   width: 100%;
   position: fixed;
@@ -31,5 +33,3 @@ const Wrap = styled.div`
     font-weight: bold;
   }
 `;
-
-export default Header;
